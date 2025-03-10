@@ -1,4 +1,4 @@
-package com.gustavo.portfolio.backend.controller;
+package com.gustavo.portfolio.backend.controllers;
 
 import com.gustavo.portfolio.backend.entities.Projeto;
 import com.gustavo.portfolio.backend.service.ProjetoService;
@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/projetos")
 @CrossOrigin(origins = "*")
-public class Controller {
+public class ProjetoController {
 
     @Autowired
     private ProjetoService projetoService;
@@ -30,8 +30,6 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.CREATED).body(projetoService.salvar(projeto));
     }
 
-
-
     @GetMapping
     public ResponseEntity<List<Projeto>> listaProjetos(){
         List<Projeto> projetos = projetoService.listar();
@@ -43,5 +41,4 @@ public class Controller {
         projetoService.excluir(id);
         return ResponseEntity.noContent().build();
     }
-
 }
