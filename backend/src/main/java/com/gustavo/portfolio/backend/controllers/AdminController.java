@@ -40,6 +40,12 @@ public class AdminController {
         return ResponseEntity.ok(adminDTOs);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AdminDTO> buscarAdminPorId(@PathVariable Long id) {
+        Admin admin = adminService.buscarAdminPorId(id);
+        return ResponseEntity.ok(new AdminDTO(admin));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<AdminDTO> atualizarAdmin(
             @PathVariable Long id,

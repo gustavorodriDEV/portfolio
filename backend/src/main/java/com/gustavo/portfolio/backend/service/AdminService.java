@@ -16,7 +16,7 @@ public class AdminService {
 
     @Autowired
     private AdminRepository adminRepository;
-    
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -55,11 +55,18 @@ public class AdminService {
             admin.setSenha(passwordEncoder.encode(adminAtualizado.getSenha()));
         }
 
+        if (adminAtualizado.getSobreMim() != null) {
+            admin.setSobreMim(adminAtualizado.getSobreMim());
+        }
+
+        if (adminAtualizado.getFotoUrl() != null) {
+            admin.setFotoUrl(adminAtualizado.getFotoUrl());
+        }
+
         return adminRepository.save(admin);
     }
 
-
     public void deletarAdmin(Long id){
-         adminRepository.deleteById(id);
+        adminRepository.deleteById(id);
     }
 }
