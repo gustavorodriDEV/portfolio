@@ -25,8 +25,6 @@ public class ProjetoController {
 
     @PostMapping
     public ResponseEntity<Projeto> salvarProjeto(@Valid @RequestBody Projeto projeto) {
-        System.out.println("JSON Recebido: " + projeto);
-        System.out.println("Descrição recebida: " + projeto.getDescricao());
         return ResponseEntity.status(HttpStatus.CREATED).body(projetoService.salvar(projeto));
     }
 
