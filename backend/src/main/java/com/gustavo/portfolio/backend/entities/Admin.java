@@ -16,6 +16,12 @@ public class Admin {
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private String nome;
+
+    @Column
+    private String profissao;
+
     @Column(columnDefinition = "TEXT")
     private String sobreMim;
 
@@ -25,10 +31,12 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(Long id, String email, String senha, String sobreMim, String fotoUrl) {
+    public Admin(Long id, String email, String senha, String nome, String profissao, String sobreMim, String fotoUrl) {
         this.id = id;
         this.email = email;
         this.senha = senha;
+        this.nome = nome;
+        this.profissao = profissao;
         this.sobreMim = sobreMim;
         this.fotoUrl = fotoUrl;
     }
@@ -57,6 +65,22 @@ public class Admin {
         this.senha = senha;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
     public String getSobreMim() {
         return sobreMim;
     }
@@ -79,6 +103,8 @@ public class Admin {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", nome='" + nome + '\'' +
+                ", profissao='" + profissao + '\'' +
                 ", sobreMim='" + sobreMim + '\'' +
                 ", fotoUrl='" + fotoUrl + '\'' +
                 '}';

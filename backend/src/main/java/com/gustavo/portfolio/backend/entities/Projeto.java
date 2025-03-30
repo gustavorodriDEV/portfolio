@@ -88,16 +88,4 @@ public class Projeto {
         this.imagemUrl = imagemUrl;
     }
 
-    // Método toString() para depuração
-    @Override
-    public String toString() {
-        return "Projeto{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", linkGithub='" + linkGithub + '\'' +
-                ", linkHostpedado='" + linkHostpedado + '\'' +
-                ", imagemUrl='" + imagemUrl + '\'' +
-                '}';
-    }
 }
