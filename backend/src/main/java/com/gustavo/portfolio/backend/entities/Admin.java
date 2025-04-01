@@ -16,7 +16,7 @@ public class Admin {
     @Column(nullable = false)
     private String senha;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
     @Column

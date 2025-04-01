@@ -1,6 +1,7 @@
 package com.gustavo.portfolio.backend.controllers;
 
 import com.gustavo.portfolio.backend.dto.AdminDTO;
+import com.gustavo.portfolio.backend.dto.AdminCadastroDTO;
 import com.gustavo.portfolio.backend.entities.Admin;
 import com.gustavo.portfolio.backend.service.AdminService;
 import jakarta.validation.Valid;
@@ -22,6 +23,12 @@ public class AdminController {
     @GetMapping("/teste")
     public String teste(){
         return "Backend está rodando perfeitamente!";
+    }
+
+    @PostMapping("/cadastro")
+    public ResponseEntity<AdminDTO> cadastrar(@RequestBody AdminCadastroDTO dto) {
+        Admin admin = adminService.criarAdmin(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AdminDTO(admin));
     }
 
     @PostMapping
