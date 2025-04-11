@@ -16,31 +16,11 @@ public class Admin {
     @Column(nullable = false)
     private String senha;
 
-    @Column
-    private String nome;
+    private String role = "ADMIN";
 
-    @Column
-    private String profissao;
+    public Admin() {}
 
-    @Column(columnDefinition = "TEXT")
-    private String sobreMim;
-
-    @Column
-    private String fotoUrl;
-
-    public Admin() {
-    }
-
-    public Admin(Long id, String email, String senha, String nome, String profissao, String sobreMim, String fotoUrl) {
-        this.id = id;
-        this.email = email;
-        this.senha = senha;
-        this.nome = nome;
-        this.profissao = profissao;
-        this.sobreMim = sobreMim;
-        this.fotoUrl = fotoUrl;
-    }
-
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -65,48 +45,12 @@ public class Admin {
         this.senha = senha;
     }
 
-    public String getNome() {
-        return nome;
+    public String getRole() {
+        return role;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getProfissao() {
-        return profissao;
-    }
-
-    public void setProfissao(String profissao) {
-        this.profissao = profissao;
-    }
-
-    public String getSobreMim() {
-        return sobreMim;
-    }
-
-    public void setSobreMim(String sobreMim) {
-        this.sobreMim = sobreMim;
-    }
-
-    public String getFotoUrl() {
-        return fotoUrl;
-    }
-
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                ", nome='" + nome + '\'' +
-                ", profissao='" + profissao + '\'' +
-                ", sobreMim='" + sobreMim + '\'' +
-                ", fotoUrl='" + fotoUrl + '\'' +
-                '}';
+    public void setRole(String role) {
+        this.role = role;
     }
 }
+

@@ -5,22 +5,21 @@ import com.gustavo.portfolio.backend.entities.Admin;
 public class AdminDTO {
     private Long id;
     private String email;
-    private String nome;
-    private String profissao;
-    private String sobreMim;
-    private String fotoUrl;
+    private String role;
+    private String senha;
 
+    // Construtor padrão
     public AdminDTO() {}
 
+    // Construtor que recebe um Admin
     public AdminDTO(Admin admin) {
         this.id = admin.getId();
         this.email = admin.getEmail();
-        this.nome = admin.getNome();
-        this.profissao = admin.getProfissao();
-        this.sobreMim = admin.getSobreMim();
-        this.fotoUrl = admin.getFotoUrl();
+        this.role = admin.getRole();
+        this.senha = admin.getSenha();
     }
 
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -29,19 +28,27 @@ public class AdminDTO {
         return email;
     }
 
-    public String getNome() {
-        return nome;
+    public String getRole() {
+        return role;
     }
 
-    public String getProfissao() {
-        return profissao;
+    public String getSenha() {
+        return senha;
     }
 
-    public String getSobreMim() {
-        return sobreMim;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getFotoUrl() {
-        return fotoUrl;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

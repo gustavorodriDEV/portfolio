@@ -4,7 +4,6 @@ import com.gustavo.portfolio.backend.dto.AdminDTO;
 import com.gustavo.portfolio.backend.dto.AdminCadastroDTO;
 import com.gustavo.portfolio.backend.entities.Admin;
 import com.gustavo.portfolio.backend.service.AdminService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,52 +19,36 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping("/teste")
-    public String teste(){
-        return "Backend está rodando perfeitamente!";
-    }
-
     @PostMapping("/cadastro")
-    public ResponseEntity<AdminDTO> cadastrar(@RequestBody AdminCadastroDTO dto) {
-        Admin admin = adminService.criarAdmin(dto);
+    public ResponseEntity<AdminDTO> cadastrarAdmin(@RequestBody AdminCadastroDTO dto) {
+        Admin admin = adminService.criarAdmin(dto.getEmail(), dto.getSenha());
         return ResponseEntity.status(HttpStatus.CREATED).body(new AdminDTO(admin));
     }
 
-    @PostMapping
-    public ResponseEntity<AdminDTO> criarAdmin(@Valid @RequestBody Admin admin) {
-        Admin adminAdicionado = adminService.criarAdmin(admin);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new AdminDTO(adminAdicionado));
+    @PutMapping("/{id}/senha")
+    public ResponseEntity<AdminDTO> atualizarSenha(@PathVariable Long id, @RequestBody String novaSenha) {
+        Admin admin = adminService.atualizarAdminSenha(id, novaSenha);
+        return ResponseEntity.ok(new AdminDTO(admin));
     }
 
     @GetMapping
     public ResponseEntity<List<AdminDTO>> listarAdmins() {
-        List<Admin> admins = adminService.listaAdmins();
+        List<Admin> admins = adminService.listarAdmins();
         List<AdminDTO> adminDTOs = admins.stream()
                 .map(AdminDTO::new)
                 .toList();
-
         return ResponseEntity.ok(adminDTOs);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AdminDTO> buscarAdminPorId(@PathVariable Long id) {
-        Admin admin = adminService.buscarAdminPorId(id);
-        return ResponseEntity.ok(new AdminDTO(admin));
-    }
+    // Endpoint de Login
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody AdminDTO adminDTO) {
+        boolean loginValido = adminService.validarLogin(adminDTO.getEmail(), adminDTO.getSenha());
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AdminDTO> atualizarAdmin(
-            @PathVariable Long id,
-            @RequestBody Admin adminAtualizado) {
-
-        Admin admin = adminService.atualizarAdmin(id, adminAtualizado);
-
-        return ResponseEntity.ok(new AdminDTO(admin));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarAdmin(@PathVariable Long id){
-        adminService.deletarAdmin(id);
-        return ResponseEntity.noContent().build();
+        if (loginValido) {
+            return ResponseEntity.ok("Login bem-sucedido");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+        }
     }
 }
