@@ -30,8 +30,24 @@ public class ProjetoController {
 
     @GetMapping
     public ResponseEntity<List<Projeto>> listaProjetos(){
-        List<Projeto> projetos = projetoService.listar();
-        return ResponseEntity.ok(projetos);
+        return ResponseEntity.ok(projetoService.listar());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Projeto> buscarProjeto(@PathVariable Long id) {
+        return ResponseEntity.ok(projetoService.buscarPorId(id));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Projeto> atualizarProjeto(@PathVariable Long id, @RequestBody Projeto novosDados) {
+        Projeto atualizado = projetoService.atualizar(id, novosDados);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @PatchMapping("/{id}/limpar-link")
+    public ResponseEntity<Projeto> limparLinkEspecifico(@PathVariable Long id, @RequestParam String tipo) {
+        Projeto atualizado = projetoService.limparLiks(id, tipo);
+        return ResponseEntity.ok(atualizado);
     }
 
     @DeleteMapping("/{id}")

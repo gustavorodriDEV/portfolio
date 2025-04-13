@@ -22,7 +22,7 @@ public class Projeto {
     private String linkGithub;
 
     @Column(length = 500)
-    private String linkHostpedado;
+    private String linkHospedado;
 
     @Column(nullable = false, length = 500)
     private String imagemUrl;
@@ -30,12 +30,12 @@ public class Projeto {
     public Projeto() {
     }
 
-    public Projeto(long id, String titulo, String descricao, String linkGithub, String linkHostpedado, String imagemUrl) {
+    public Projeto(long id, String titulo, String descricao, String linkGithub, String linkHospedado, String imagemUrl) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.linkGithub = linkGithub;
-        this.linkHostpedado = linkHostpedado;
+        this.linkHospedado = linkHospedado;
         this.imagemUrl = imagemUrl;
     }
 
@@ -72,12 +72,12 @@ public class Projeto {
         this.linkGithub = linkGithub;
     }
 
-    public String getLinkHostpedado() {
-        return linkHostpedado;
+    public String getLinkHospedado() {
+        return linkHospedado;
     }
 
-    public void setLinkHostpedado(String linkHostpedado) {
-        this.linkHostpedado = linkHostpedado;
+    public void setLinkHospedado(String linkHostpedado) {
+        this.linkHospedado = linkHostpedado;
     }
 
     public String getImagemUrl() {

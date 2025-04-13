@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = {"http://localhost:3000", "*"})
 @RestController
 @RequestMapping("/api/perfil")
-@CrossOrigin(origins = "*")
 public class PerfilApresentacaoController {
 
     @Autowired
