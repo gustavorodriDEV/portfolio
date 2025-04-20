@@ -6,9 +6,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public CorsFilter corsFilter() {
@@ -21,10 +23,19 @@ public class WebConfig {
         config.addAllowedMethod(HttpMethod.GET);
         config.addAllowedMethod(HttpMethod.POST);
         config.addAllowedMethod(HttpMethod.PUT);
+        config.addAllowedMethod(HttpMethod.PATCH);
         config.addAllowedMethod(HttpMethod.DELETE);
-        config.addAllowedMethod(HttpMethod.OPTIONS); // importante!
+        config.addAllowedMethod(HttpMethod.OPTIONS);
 
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String caminhoAbsoluto = System.getProperty("user.dir") + "/uploads/";
+        registry
+                .addResourceHandler("/uploads/**")
+                .addResourceLocations("file:" + caminhoAbsoluto);
     }
 }
